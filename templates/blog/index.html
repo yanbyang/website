@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block main %}
+    {% if error_msg %}
+        <p>{{ error_msg }}</p>
+    {% endif %}
+
+    {% for post in post_list %}
+        <div class="item">
+            <div class="item-box  layer-photos-demo1 layer-photos-demo">
+                <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <h5>{{ post.author }}发布于：<span>{{ post.created_time }}</span></h5>
+                <p>{{ post.excerpt }}...</p>
+                <!-- <img src="../res/static/images/item.png" alt="" layer-index="0"> -->
+            </div>
+            <div class="comment count">
+                <a href="details.html#comment"><i class="layui-icon layui-icon-read"></i>&nbsp;{{ post.views }}</a>
+                <a href="javascript:;" class="like"><i class="layui-icon layui-icon-dialogue"></i>&nbsp;23</a>
+            </div>
+        </div>
+        
+    {% empty %}
+        <div class="no-post">暂时还没有发布的文章！</div>
+    {% endfor %}
+    <!-- 简单分页效果
+    <div class="pagination-simple">
+        <a href="#">上一页</a>
+        <span class="current">第 6 页 / 共 11 页</span>
+        <a href="#">下一页</a>
+    </div>
+    -->
+    {% if is_paginated %}
+    <div class="pagination">
+        {% if first %}
+            <a href="?page=1">1</a>
+        {% endif %}
+        {% if left %}
+            {% if left_has_more %}
+                <span>...</span>
+            {% endif %}
+            {% for i in left %}
+                <a href="?page={{ i }}">{{ i }}</a>
+            {% endfor %}
+        {% endif %}
+        <a href="?page={{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a>
+        {% if right %}
+            {% for i in right %}
+                <a href="?page={{ i }}">{{ i }}</a>
+            {% endfor %}
+            {% if right_has_more %}
+                <span>...</span>
+            {% endif %}
+        {% endif %}
+        {% if last %}
+            <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock main %}
+            
