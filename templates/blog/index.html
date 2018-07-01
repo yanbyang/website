@@ -3,7 +3,9 @@
     {% if error_msg %}
         <p>{{ error_msg }}</p>
     {% endif %}
-
+    <h4 class="item-title">
+            <p><i class="layui-icon layui-icon-speaker"></i>公告：<span>欢迎来到我的轻博客</span></p>
+    </h4>
     {% for post in post_list %}
         <div class="item">
             <div class="item-box  layer-photos-demo1 layer-photos-demo">
@@ -29,7 +31,12 @@
     </div>
     -->
     {% if is_paginated %}
-    <div class="pagination">
+    <div class="pagination layui-box layui-laypage layui-laypage-molv">
+        {% if page_number == 1 %}
+            <a href="javascript:void(0);" class="layui-laypage-prev layui-disabled">上一页</a>
+        {% else %}
+            <a href="?page={{ prenumber }}" class="layui-laypage-prev">上一页</a>
+        {% endif %}
         {% if first %}
             <a href="?page=1">1</a>
         {% endif %}
@@ -41,7 +48,8 @@
                 <a href="?page={{ i }}">{{ i }}</a>
             {% endfor %}
         {% endif %}
-        <a href="?page={{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a>
+        
+        <a href="?page={{ page_obj.number }}" style="background-color: #1E9FFF;color: #fff;">{{ page_obj.number }}</a>
         {% if right %}
             {% for i in right %}
                 <a href="?page={{ i }}">{{ i }}</a>
@@ -53,6 +61,11 @@
         {% if last %}
             <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
         {% endif %}
+        {% if page_number == total_pages %}
+            <a href="javascript:void(0);" class="layui-laypage-next layui-disabled">下一页</a>
+        {% else %}
+            <a href="?page={{ nexnumber }}" class="layui-laypage-next">下一页</a>
+        {% endif%}
     </div>
     {% endif %}
 {% endblock main %}

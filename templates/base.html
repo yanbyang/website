@@ -8,9 +8,11 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'blog/css/layui.css' %}"  media="all">
     <link rel="stylesheet" href="{% static 'blog/css/modules/layer/default/layer.css' %}"  media="all">
     <script src="{% static 'blog/layui.all.js' %}"></script>
+    <script src="{% static 'blog/lay/modules/layer.js' %}"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
     <style>
         .component {
@@ -102,7 +104,7 @@
     padding-bottom: 10px;
 }
 .container .item .comment {
-    width: 100%;
+    /* width: 100%; */
     line-height: 20px;
     background: #f9f9f9;
     font-size: 14px;
@@ -120,6 +122,83 @@
     /* border-left: 1px solid #efefef; */
     margin-left: 5px;
     padding-left: 10px;
+}
+.layui-laypage{
+    padding: 10px 300px;
+}
+.info-item {
+    font-size: 14px;
+    margin-bottom: 66px;
+}
+.info-img {
+    cursor: pointer;
+    float: left;
+    padding-right: 20px;
+}
+.info-text {
+    padding-left: 88px;
+}
+.count {
+    /* margin-top: 35px; */
+    color: #999999;
+    cursor: pointer;
+}
+.title {
+    overflow: hidden;
+    /* margin-bottom: 10px; */
+}
+.title .name {
+    float: left;
+    display: block;
+    line-height: 38px;
+    color: #787878;
+}
+.info-img {
+    cursor: pointer;
+    float: left;
+    padding-right: 20px;
+    width: 70px;
+    height: 70px;
+}
+.title .info-img i {
+    font-size: 24px;
+    padding-right: 5px;
+    position: relative;
+    top: 4px;
+}
+.count i {
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+}
+.info-intr {
+    margin-top: 15px;
+    line-height: 24px;
+}
+.comt {
+    padding: 0 20px;
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+.pull-left {
+    float: left !important;
+}
+.pull-right {
+    float: right !important;
+}
+.layui-layer-dir {
+    box-shadow: none;
+    border: 1px solid #d2d2d2;
+}
+.layui-layer-dir .layui-layer-content {
+    padding: 10px;
+}
+#toc li {
+    line-height: 26px;
+    margin-left: 20px;
+    overflow: visible;
+    list-style-type: disc;
 }
     </style>
 </head>
@@ -192,81 +271,16 @@
         <div class="container-wrap">
                 <div class="container">
                         <div class="contar-wrap">
-                            <h4 class="item-title">
-                                <p><i class="layui-icon layui-icon-speaker"></i>公告：<span>欢迎来到我的轻博客</span></p>
-                            </h4>
                             {% block main %}
                             {% endblock main %}
-                            
-                        <div class="item-btn">
-                            <button class="layui-btn layui-btn-normal">下一页</button>
-                        </div>
                 </div>
         </div>
         
         </div>
-        <!-- <div class="layui-body">
-                <div style="padding: 15px;">
-                  内容主体区域
-                  
-                  <br><br>
-                  <blockquote class="layui-elem-quote">
-                    layui 之所以赢得如此多人的青睐，更多是在于它“前后台系统通吃”的能力。既可编织出绚丽的前台页面，又可满足繁杂的后台功能需求。
-                    <br>layui 后台布局， 致力于让每一位开发者都能轻松搭建自己的后台模板。
-                  </blockquote>
-                  
-                  <a href="/doc/element/layout.html#admin" target="_blank" class="layui-btn layui-btn-big">获取该布局代码</a>
-                  
-                  <br><br><br><br>
-                  
-                   
-                  
-                  
-                  下面是充数内容，为的是出现滚动条<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>
-                </div>
-              </div> -->
           <div class="layui-footer">
                 <!-- 底部固定区域 -->
                 © layui.com - 底部固定区域
               </div>
 </div>
-<script src="//res.layui.com/layui/src/layui.js?t=1527693307626" charset="utf-8"></script>
-    <!-- <header id="site-header">
-        <div class="row">
-            <div class="col-md-4 col-sm-5 col-xs-8">
-                <div class="logo">
-                    <h1><a href="{% url 'blog:index' %}"><b>Black</b> &amp; White</a></h1>
-                </div>
-            </div>
-            <div class="col-md-8 col-sm-7 col-xs-4">
-                <nav class="main-nav" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" id="trigger-overlay" class="navbar-toggle">
-                            <span class="ion-navicon"></span>
-                        </button>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">首页</a></li>
-                            <li class="cl-effect-11"><a href="full-width.html" data-hover="博客">博客</a></li>
-                            <li class="cl-effect-11"><a href="about.html" data-hover="关于">关于</a></li>
-                            <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li>
-                        </ul>
-                    </div>
-                </nav>
-                <div id="header-search-box">
-                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
-                    <div id="search-form" class="search-form">
-                        <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
-                            <input type="search" name="q" placeholder="搜索" required>
-                            <button type="submit"><span class="ion-ios-search-strong"></span></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header> -->
-
 </body>
 </html>
