@@ -152,6 +152,10 @@ class IndexView(ListView):
             'right_has_more': right_has_more,
             'first': first,
             'last': last,
+            'page_number':page_number,
+            'total_pages':total_pages,
+            'prenumber':page_number-1,
+            'nexnumber':page_number+1
         }
 
         return data
