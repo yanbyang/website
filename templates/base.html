@@ -9,6 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/github.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/layui.css' %}"  media="all">
     <link rel="stylesheet" href="{% static 'blog/css/modules/layer/default/layer.css' %}"  media="all">
     <script src="{% static 'blog/layui.all.js' %}"></script>
@@ -23,6 +26,9 @@
         }
         body{
             background: #f2f2f2;
+        }
+        a:focus, a:hover {
+            text-decoration: none;
         }
         .search-form{
             padding: 10px 200px;
@@ -60,7 +66,7 @@
     margin: 0 auto;
 }
 .container h4 {
-    margin-bottom: 15px;
+    margin-bottom: 2px;
     line-height: 50px;
     background: #fff;
     font-size: 16px;
@@ -71,16 +77,22 @@
 }
 .container h4 p i {
     font-size: 26px;
-    padding-right: 10px;
+    /* padding-right: 10px; */
     position: relative;
     top: 3px;
+}
+.layui-rss{
+    display: inline-block;
+    padding-right: 20px;
+    float: right;
+    color: #666666;
 }
 .container h4 p {
     padding-left: 40px;
     color: #666666;
 }
 .container .item {
-    margin-bottom: 15px;
+    margin-bottom: 2px;
     background: #fff;
     padding-top: 20px;
 }
@@ -211,18 +223,42 @@
 .search-btn{
     border: none;
 }
+.layui-logo{
+    text-align: right !important;
+}
+.layui-logo a img {
+    border-radius: 3px;
+    height: 60px;
+    width: 60px;
+    margin-top: -1px;
+}
+/* .layui-icon{
+    transform: rotate(320deg) !important;
+    -ms-transform: rotate(320deg) !important;
+    -webkit-transform: rotate(320deg) !important;	
+    -o-transform: rotate(320deg) !important;
+    -moz-transform: rotate(320deg) !important;
+} */
     </style>
 </head>
 <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-    <div class="layui-logo"><i class="layui-icon layui-icon-search"></i></div>
+    <div class="layui-logo">
+        <a href="{% url 'blog:index' %}">
+            <img src="{% static 'blog/images/logo.png' %}" alt="">
+        </a>
+    </div>
     
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="{% url 'blog:index' %}">首页</a></li>
-      <li class="layui-nav-item"><a href="">商品管理</a></li>
-      <li class="layui-nav-item"><a href="">用户</a></li>
+      {% get_categories as category_list %}
+      {% for category in category_list %}
+      <li class="layui-nav-item"><a href="{% url 'blog:category' category.pk %}">{{ category.name }}</a></li>
+      {% empty %}
+      {% endfor %}
+      <!-- <li class="layui-nav-item"><a href="">用户</a></li>
       <li class="layui-nav-item">
         <a href="javascript:;">其它系统<span class="layui-nav-more"></span></a>
         <dl class="layui-nav-child layui-anim layui-anim-upbit">
@@ -230,7 +266,7 @@
           <dd><a href="">消息管理</a></dd>
           <dd><a href="">授权管理</a></dd>
         </dl>
-      </li>
+      </li> -->
     <span class="layui-nav-bar" style="width: 0px; left: 246px; opacity: 0; top: 55px;"></span></ul>
     <form class="layui-form layui-nav layui-layout-right search-form" role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
         <div class="layui-form-item">

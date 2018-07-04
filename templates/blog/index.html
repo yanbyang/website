@@ -4,11 +4,17 @@
         <p>{{ error_msg }}</p>
     {% endif %}
     <h4 class="item-title">
-            <p><i class="layui-icon layui-icon-speaker"></i>公告：<span>欢迎来到我的轻博客</span></p>
+            <p><i class="layui-icon layui-icon-speaker"></i>公告：<span>欢迎来到我的轻博客</span><a class="layui-rss" href="{% url 'rss' %}"><i class="layui-icon layui-icon-voice"></i> RSS 订阅</a></p>
+    </h4>
+    <h4 class="item-title">
+        <p>
+            <a href="">最新</a>
+            <a href="">最热</a>        
+        </p>
     </h4>
     {% for post in post_list %}
         <div class="item">
-            <div class="item-box  layer-photos-demo1 layer-photos-demo">
+            <div class="item-box">
                 <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                 <h5>{{ post.author }}发布于：<span>{{ post.created_time }}</span></h5>
                 <p>{{ post.excerpt }}...</p>
