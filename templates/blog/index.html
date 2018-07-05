@@ -8,8 +8,8 @@
     </h4>
     <h4 class="item-title">
         <p>
-            <a href="">最新</a>
-            <a href="">最热</a>        
+            <a href="{% url 'blog:index' %}">最新</a>
+            <a href="javascript:alert('等待完善')">最热</a>        
         </p>
     </h4>
     {% for post in post_list %}
